@@ -39,39 +39,40 @@ Updated `.env`:
 - `.env`
 
 ### Task 1.3: Database Schema Migrations
-**Status:** in_progress  
+**Status:** completed  
 **Priority:** highest
 
-Create migrations:
+Created migrations:
 1. `donation_issues` - volunteer-created donation requests
 2. `donations` - food pledges by donators
 3. `images` - polymorphic for all image types
 4. `friendships` - user friendship relationships
 5. `issue_messages` - chat messages under donation issues
 6. `private_messages` - direct messages between friends
-7. `user_profiles` - extended user profile data
+7. `user_profiles` - extended user profile data (with profile_photo_path on users)
 
 **Files:**
-- `database/migrations/*_create_donation_issues_table.php`
-- `database/migrations/*_create_donations_table.php`
-- `database/migrations/*_create_images_table.php`
-- `database/migrations/*_create_friendships_table.php`
-- `database/migrations/*_create_issue_messages_table.php`
-- `database/migrations/*_create_private_messages_table.php`
-- `database/migrations/*_create_user_profiles_table.php`
+- `database/migrations/2026_08_05_035206_create_donation_issues_table.php`
+- `database/migrations/2026_08_05_035228_create_donations_table.php`
+- `database/migrations/2026_08_05_035229_create_images_table.php`
+- `database/migrations/2026_08_05_035230_create_friendships_table.php`
+- `database/migrations/2026_08_05_035231_create_issue_messages_table.php`
+- `database/migrations/2026_08_05_035232_create_private_messages_table.php`
+- `database/migrations/2026_08_05_035233_create_user_profiles_table.php`
 
 ### Task 1.4: Models
-**Status:** pending  
+**Status:** completed  
 **Priority:** high
 
-Create models with relationships:
+Created models with relationships:
 - `DonationIssue` - belongsTo User, hasMany Donations, IssueMessages
-- `Donation` - belongsTo User, belongsTo DonationIssue, hasMany Images
+- `Donation` - belongsTo User, DonationIssue, hasMany Images (polymorphic)
 - `Friendship` - belongsTo User (requester, recipient)
 - `IssueMessage` - belongsTo User, DonationIssue
 - `PrivateMessage` - belongsTo User (sender, recipient)
 - `Image` - polymorphic for all image types
 - `UserProfile` - belongsTo User
+- `User` - extended with all relationships
 
 **Files:**
 - `app/Models/DonationIssue.php`
@@ -81,6 +82,7 @@ Create models with relationships:
 - `app/Models/PrivateMessage.php`
 - `app/Models/Image.php`
 - `app/Models/UserProfile.php`
+- `app/Models/User.php` (updated)
 
 ---
 

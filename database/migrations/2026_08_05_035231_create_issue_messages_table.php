@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('issue_messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('donation_issue_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->text('message');
             $table->timestamps();
+
+            $table->index(['donation_issue_id', 'created_at']);
         });
     }
 

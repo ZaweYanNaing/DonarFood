@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('private_messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('recipient_id')->constrained('users')->cascadeOnDelete();
+            $table->text('message');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
+
+            $table->index(['sender_id', 'created_at']);
+            $table->index(['recipient_id', 'created_at']);
         });
     }
 

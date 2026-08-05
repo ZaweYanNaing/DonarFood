@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
+            $table->morphs('imageable'); // imageable_id, imageable_type
+            $table->string('path');
+            $table->string('original_name')->nullable();
+            $table->string('mime_type')->nullable();
+            $table->integer('size')->nullable();
+            $table->string('alt')->nullable();
+            $table->enum('type', ['issue', 'donation', 'profile', 'other'])->default('other');
             $table->timestamps();
+
+            $table->index(['imageable_type', 'imageable_id']);
         });
     }
 
