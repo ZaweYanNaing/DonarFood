@@ -87,103 +87,62 @@ Created models with relationships:
 ---
 
 ## Phase 2: Core Features - Donation Issues
+**Status:** completed
 
-### Task 2.1: Donation Issue API Resources
-**Status:** pending  
-**Priority:** high
-
-Create API Resources:
-- `DonationIssueResource` - full issue data
-- `DonationIssueCardResource` - minimal data for lists
-- `DonationResource` - donation pledge data
-
-**Files:**
-- `app/Http/Resources/DonationIssueResource.php`
-- `app/Http/Resources/DonationIssueCardResource.php`
-- `app/Http/Resources/DonationResource.php`
-
-### Task 2.2: Issue Controller & Routes
-**Status:** pending  
-**Priority:** high
-
-Routes:
-- `GET /issues` - list all (public, paginated)
-- `GET /issues/{issue}` - show with donations
-- `POST /issues` - create (volunteer only)
-- `PUT /issues/{issue}` - update (owner only)
-- `DELETE /issues/{issue}` - delete (owner only)
-
-**Files:**
-- `app/Http/Controllers/DonationIssueController.php`
-- `routes/web.php` - additional routes
-
-### Task 2.3: Donation Controller & Routes
-**Status:** pending  
-**Priority:** high
-
-Routes:
-- `GET /issues/{issue}/donations` - list pledges
-- `POST /issues/{issue}/donations` - create pledge (donator)
-- `PUT /donations/{donation}` - update pledge amount
-- `DELETE /donations/{donation}` - cancel pledge
-
-**Files:**
-- `app/Http/Controllers/DonationController.php`
-
-### Task 2.4: Issue Policy
-**Status:** pending  
-**Priority:** high
-
-Authorization policies for donation issues and donations.
-
-**Files:**
-- `app/Policies/DonationIssuePolicy.php`
-- `app/Policies/DonationPolicy.php`
+### Summary
+- API Resources for donation issues, donations, messages, and images
+- DonationIssueController with full CRUD + Inertia views
+- DonationController for pledge management
+- Authorization policies for owner-only updates/deletes
+- Routes configured in web.php
 
 ---
 
 ## Phase 3: Image Upload System
 
 ### Task 3.1: Image Upload Controller
-**Status:** pending  
-**Priority:** high
+**Status:** completed
 
 Routes:
 - `POST /upload/issue/{issue}` - upload to issue
 - `POST /upload/donation/{donation}` - upload to donation
 - `POST /upload/profile` - upload profile photo
+- `DELETE /upload/{image}` - delete image
 
 **Files:**
 - `app/Http/Controllers/ImageController.php`
 
 ### Task 3.2: File Validation & Storage
-**Status:** pending  
-**Priority:** medium
+**Status:** completed
 
-Implement:
-- File type validation (jpg, png, webp)
+Implemented:
+- File type validation (jpg, png, webp, gif)
 - Size limit (5MB)
 - Storage in `storage/app/public/uploads`
+- Profile photos stored with user ID
 
-**Files:**
-- `app/Rules/ValidImage.php`
+---
+
+## Phase 4: Social Features
 
 ---
 
 ## Phase 4: Social Features
 
 ### Task 4.1: Friendship Controller
-**Status:** pending  
-**Priority:** high
+**Status:** in_progress
 
 Routes:
 - `GET /friends` - list friends
+- `GET /friends/requests` - list pending requests
 - `POST /friends/request/{user}` - send friend request
 - `PUT /friends/request/{user}` - accept/reject request
 - `DELETE /friends/{user}` - unfriend
 
 **Files:**
 - `app/Http/Controllers/FriendshipController.php`
+- `app/Http/Resources/FriendshipResource.php`
+- `app/Http/Resources/UserResource.php`
 
 ### Task 4.2: User Profile Controller
 **Status:** pending  
