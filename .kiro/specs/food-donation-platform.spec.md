@@ -130,7 +130,7 @@ Implemented:
 ## Phase 4: Social Features
 
 ### Task 4.1: Friendship Controller
-**Status:** in_progress
+**Status:** completed
 
 Routes:
 - `GET /friends` - list friends
@@ -143,6 +143,44 @@ Routes:
 - `app/Http/Controllers/FriendshipController.php`
 - `app/Http/Resources/FriendshipResource.php`
 - `app/Http/Resources/UserResource.php`
+- `app/Http/Resources/UserProfileResource.php`
+
+### Task 4.2: User Profile Controller
+**Status:** completed
+
+Routes:
+- `GET /profile/me` - own profile
+- `GET /profile/{user}` - public profile
+- `PUT /profile` - update profile
+- `GET /profile/{user}/donations` - user's donation activity
+- `GET /profile/{user}/issues` - user's created issues
+
+**Files:**
+- `app/Http/Controllers/ProfileController.php`
+
+### Task 4.3: Message Controller
+**Status:** completed
+
+Routes:
+- `GET /messages` - inbox with conversations
+- `GET /messages/{user}` - chat with friend
+- `POST /messages/{user}` - send message
+- `GET /messages/unread/count` - unread count
+
+**Files:**
+- `app/Http/Controllers/MessageController.php`
+- `app/Http/Resources/PrivateMessageResource.php`
+
+### Task 4.4: Share Feature
+**Status:** completed
+
+Implemented share functionality via:
+- `route('issues.show', $issue)` - shareable issue links
+- User profiles include share info in API resources
+
+---
+
+## Phase 5: Real-time Communication (WebSockets)
 
 ### Task 4.2: User Profile Controller
 **Status:** pending  
@@ -169,49 +207,21 @@ Implement share functionality:
 
 ## Phase 5: Real-time Communication (WebSockets)
 
-### Task 5.1: Issue Chat (Reverb)
-**Status:** pending  
-**Priority:** high
+### Task 5.1: Event Classes
+**Status:** completed
 
 Channels:
-- `issue.{issue_id}` - public chat under donation issue
-
-Events:
-- `IssueMessageSent` - new chat message
+- `issue.{issueId}` - public chat under donation issue
+- `private-chat.{userId}` - personal messages
+- `notifications.{userId}` - friend request notifications
 
 **Files:**
 - `app/Events/IssueMessageSent.php`
-- `app/Listeners/BroadcastIssueMessage.php`
-- `routes/channels.php`
-
-### Task 5.2: Private Chat (Reverb)
-**Status:** pending  
-**Priority:** high
-
-Channels:
-- `private-chat.{user_id}` - personal messages
-
-Events:
-- `PrivateMessageSent` - new private message
-
-**Files:**
 - `app/Events/PrivateMessageSent.php`
-- `app/Listeners/BroadcastPrivateMessage.php`
-
-### Task 5.3: Friendship Events
-**Status:** pending  
-**Priority:** medium
-
-Channels:
-- `friendship.{user_id}` - friend request notifications
-
-Events:
-- `FriendRequestSent`
-- `FriendRequestAccepted`
-
-**Files:**
 - `app/Events/FriendRequestSent.php`
 - `app/Events/FriendRequestAccepted.php`
+- `app/Providers/BroadcastServiceProvider.php`
+- `routes/channels.php`
 
 ---
 
